@@ -38,10 +38,9 @@ func deleteURL(id string) {
 }
 
 func updateURL(id, newURL string) {
-	updatedURL := generateShortURL(newURL)
 	urlDB[id] = URL{
 		MainURL: newURL,
-        SortURL: updatedURL,
+        SortURL: id,
 	}
 }
 
@@ -105,6 +104,7 @@ func UpdateUrlHandler(w http.ResponseWriter, r *http.Request){
         return
     }
 	updateURL(data.ID_, data.URL_)
+	fmt.Fprintf(w, "URL updated successfully")
 
 }
 func main() {
